@@ -41,15 +41,27 @@ export async function createPost(data) {
 /* Get a specific post by ID */
 /* Use the correct endpoint */
 export async function readPost(id) {
-  const url = API_SOCIAL_POSTS_ID(id); 
-  console.log('Fetching post from URL:', url);
-  const response = await fetch(url, {
-    method: "GET",
-    headers: headers(true),
-  });
-  if (!response.ok) throw new Error("Failed to fetch post");
-  return await response.json();
+  const url = API_SOCIAL_POSTS_ID(id);
+  
+
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: headers(true),
+    });
+    
+    if (!response.ok) throw new Error("Failed to fetch post");
+    
+    const data = await response.json();
+    
+
+    return data; 
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    throw error;
+  }
 }
+
 
 /* Update a post by ID */
 export async function updatePost(id, data) {

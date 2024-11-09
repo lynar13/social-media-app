@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get('id');
   const form = document.getElementById('editPostForm');
-  console.log('Post ID:', postId);  // Ensure this outputs the correct ID
+  
 
   if (!postId) {
     alert('No post ID specified.');
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Convert the tags string into an array
         updatedData.tags = updatedData.tags.split(',').map(tag => tag.trim());
-        console.log('Updated Post Data:', updatedData); // Log the updated data for debugging
+        
 
         try {
           // Update the post using the modified payload structure

@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Convert tags to an array (assuming tags are comma-separated)
       postData.tags = postData.tags ? postData.tags.split(',').map(tag => tag.trim()) : [];
 
-      console.log('Post Data:', postData);
 
       try {
         const post = await createPost(postData);
