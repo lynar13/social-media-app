@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <script type="module" src="/src/js/app.js"></script>
+    <script type="module" src="/src/js/ui/global/logout.js"></script>
+    <script type="module" src="/src/js/ui/profile/profile.js"></script>
+  </head>
+  <body>
+    <div class="container my-5">
+      <!-- Navigation Links -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="/index.html" class="btn btn-link navbar-brand">Home</a>
+        <button id="logoutButton" class="btn btn-outline-danger">Logout</button>
+      </div>
+
+    <!-- Profile Section -->
+    <section class="card p-4 shadow-sm">
+      <h1 class="text-center mb-4">Profile</h1>
+
+      <div class="mb-3">
+        <h2>Welcome <span id="username"></span></h2>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label"><strong>Email:</strong></label>
+        <span id="email"></span>
+      </div>
+
+      <div class="mb-3">
+        <label for="bio" class="form-label"><strong>Bio:</strong></label>
+        <textarea id="bio" class="form-control" placeholder="Your bio goes here..."></textarea>
+      </div>
+
+
+      <!-- Action Buttons -->
+      <div class="d-flex justify-content-between">
+        <a href="/post/create/index.html" class="btn btn-secondary">Create Post</a>
+        <a href="/posts/index.html" class="btn btn-secondary">View Posts</a>
+      </div>
+    </section>
+  </div>
+
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
