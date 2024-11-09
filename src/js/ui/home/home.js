@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const postList = document.getElementById('postList');
   const pagination = document.getElementById('pagination');
-  const logoutButton = document.getElementById('logoutButton');
+  
 
   // Check login status and hide logout button if not logged in
   function toggleLogoutButton() {
@@ -20,6 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
       logoutButton.style.display = 'none'; // Hide if not logged in
     }
   }
+
+  /* Check if the user is logged in */
+  const loginButton = document.getElementById('loginButton');
+  const registerButton = document.getElementById('registerButton');
+  const logoutButton = document.getElementById('logoutButton');
+
+  // Function to toggle visibility based on login status
+  function updateAuthButtons() {
+    const isLoggedIn = localStorage.getItem('token'); // Replace 'token' with your actual key
+
+    if (isLoggedIn) {
+      loginButton.style.display = 'none';
+      registerButton.style.display = 'none';
+      logoutButton.style.display = 'block';
+    } else {
+      loginButton.style.display = 'block';
+      registerButton.style.display = 'block';
+      logoutButton.style.display = 'none';
+    }
+  }
+
+  // Call the function on page load
+  updateAuthButtons();
 
   // Fetch and render posts based on the current page
   async function loadPosts(page) {
