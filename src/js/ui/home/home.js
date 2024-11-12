@@ -1,5 +1,3 @@
-// src/js/ui/home/home.js
-
 import { readPosts } from '../../api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,40 +7,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const postList = document.getElementById('postList');
   const pagination = document.getElementById('pagination');
   
-
-  // Check login status and hide logout button if not logged in
-  function toggleLogoutButton() {
-    const isLoggedIn = localStorage.getItem('token'); // Check for token in localStorage
-
-    if (isLoggedIn) {
-      logoutButton.style.display = 'block'; // Show if logged in
-    } else {
-      logoutButton.style.display = 'none'; // Hide if not logged in
-    }
-  }
-
-  /* Check if the user is logged in */
   const loginButton = document.getElementById('loginButton');
   const registerButton = document.getElementById('registerButton');
   const logoutButton = document.getElementById('logoutButton');
 
-  // Function to toggle visibility based on login status
+  // Function to toggle visibility of login, register, and logout buttons
   function updateAuthButtons() {
-    const isLoggedIn = localStorage.getItem('token'); // Replace 'token' with your actual key
+    const isLoggedIn = localStorage.getItem('token'); // Check if token exists
 
     if (isLoggedIn) {
+      // User is logged in, show logout button, hide login and register buttons
       loginButton.style.display = 'none';
       registerButton.style.display = 'none';
-      logoutButton.style.display = 'block';
+      logoutButton.style.display = 'inline-block';
     } else {
-      loginButton.style.display = 'block';
-      registerButton.style.display = 'block';
+      // User is not logged in, show login and register buttons, hide logout button
+      loginButton.style.display = 'inline';
+      registerButton.style.display = 'inline';
       logoutButton.style.display = 'none';
     }
   }
 
   // Call the function on page load
   updateAuthButtons();
+
+  // Add event listener to logout button to log out the user
+  if (logoutButton) {
+    logoutButton.addEventListener('click', () => {
+      localStorage.removeItem('token'); // Remove token from localStorage
+      updateAuthButtons(); // Update button visibility
+    });
+  }
 
   // Fetch and render posts based on the current page
   async function loadPosts(page) {
@@ -112,5 +107,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial load
   loadPosts(currentPage);
-  toggleLogoutButton(); // Check login status on page load
 });
