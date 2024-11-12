@@ -67,7 +67,7 @@ export async function readPost(id) {
 export async function updatePost(id, data) {
   const response = await fetch(API_SOCIAL_POSTS_ID(id), {
     method: "PUT",
-    headers: headers(true), // Include Content-Type and Authorization
+    headers: headers(true, true), // Include Content-Type and Authorization
     body: JSON.stringify(data),
   });
   if (!response.ok) throw new Error("Failed to update post");
