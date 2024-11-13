@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const post = await createPost(postData);
         
         // Redirect to the newly created post's view page
-        window.location.href = `/post/index.html?id=${post.id}`;
+        window.location.href = `../post/index.html?id=${post.id}`;
       } catch (error) {
         console.error('Error creating post:', error);
         alert('Failed to create post: ' + error.message);

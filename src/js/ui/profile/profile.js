@@ -1,4 +1,4 @@
-import { readProfile } from '../../api/profile.js'; // Ensure the correct import path
+import { readProfile } from '/social-media-app/src/js/api/profile.js'; // Ensure the correct import path
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Retrieve the user string from localStorage
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // If the user string is not present, redirect to login
   if (!userString) {
     alert('User not found. Please login again.');
-    window.location.href = '/auth/login/index.html';
+    window.location.href = './auth/login/index.html';
     return;
   }
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token'); // Remove the token as well if needed
     alert('Invalid user data found. Redirecting to login.');
-    window.location.href = '/auth/login/index.html';
+    window.location.href = './auth/login/index.html';
     return;
   }
 

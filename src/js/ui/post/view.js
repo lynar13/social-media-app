@@ -25,7 +25,7 @@ async function loadPosts(page, limit) {
           <div class="card-body">
             <h5 class="card-title">${post.title || 'Untitled'}</h5>
             <p class="card-text">${post.body ? post.body.slice(0, 100) + '...' : 'No Content Available'}</p>
-            <a href="/post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
+            <a href="../post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
           </div>
         </div>
       `;
