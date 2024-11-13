@@ -1,6 +1,6 @@
 // src/js/ui/auth/login.js
 
-import { login } from '../../api/auth.js'; // Ensure correct import path
+import { login } from '/social-media-app/src/js/api/auth.js'; // Ensure correct import path
 
 export async function onLogin(event) {
   event.preventDefault(); // Prevent the default form submission

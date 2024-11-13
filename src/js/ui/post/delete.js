@@ -1,5 +1,5 @@
 // src/js/ui/post/delete.js
-import { deletePost } from '../../api/post.js';
+import { deletePost } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const deleteButton = document.getElementById('deleteButton');

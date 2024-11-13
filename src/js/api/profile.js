@@ -1,7 +1,7 @@
 // src/js/api/profile.js
 
-import { headers } from './headers.js';
-import { API_SOCIAL_PROFILES } from './constants.js';
+import { headers } from '/social-media-app/src/js/api/headers.js';
+import { API_SOCIAL_PROFILES } from '/social-media-app/src/js/api/constants.js';
 import { currentUser } from '../utilities/currentUser.js';
 
 // Fetch profile data for the current user

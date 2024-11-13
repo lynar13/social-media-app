@@ -1,6 +1,6 @@
 // src/js/ui/auth/register.js
 
-import { register } from '../../api/auth.js';
+import { register } from '/social-media-app/src/js/api/auth.js';
 
 export async function onRegister(event) {
   event.preventDefault(); // Prevent default form submission

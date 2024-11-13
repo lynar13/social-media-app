@@ -1,6 +1,6 @@
 // src/js/ui/post/view.js
 
-import { readPosts } from '../../api/post.js';
+import { readPosts } from '/social-media-app/src/js/api/post.js';
 
 let currentPage = 1;
 let postsPerPage = 12;

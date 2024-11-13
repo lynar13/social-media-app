@@ -1,4 +1,4 @@
-import { readPost } from '../../api/post.js';
+import { readPost } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const postId = getPostIdFromUrl();

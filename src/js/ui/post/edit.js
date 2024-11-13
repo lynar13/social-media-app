@@ -1,4 +1,4 @@
-import { readPost, updatePost } from '../../api/post.js';
+import { readPost, updatePost } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
