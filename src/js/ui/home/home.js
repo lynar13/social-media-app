@@ -1,4 +1,4 @@
-import { readPosts } from '/socail-media-app/src/js/api/post.js';
+import { readPosts } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
