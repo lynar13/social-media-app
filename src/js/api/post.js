@@ -1,12 +1,10 @@
-import { headers } from "/social-media-app/src/js/api/headers.js";
-import { API_SOCIAL_POSTS } from "/social-media-app/src/js/api/constants.js";
-import { API_SOCIAL_POSTS_ID } from "/social-media-app/src/js/api/constants.js";
-import { currentUser } from "/social-media-app/src/js/utilities/currentUser.js";
+import { headers } from "./headers.js";
+import { API_SOCIAL_POSTS, API_SOCIAL_POSTS_ID } from "./constants.js";
+import { currentUser } from "../utilities/currentUser.js"; // Adjust relative path as needed
 
 /* Create new post */
 export async function createPost(data) {
   const user = currentUser();
-
 
   /* Check if user is logged in and token is available */
   if (!user || !localStorage.getItem('token')) {
@@ -22,7 +20,6 @@ export async function createPost(data) {
       body: JSON.stringify(data),
     });
     
-    /* Log response for debugging */
     console.log('Create Post Response:', response);
 
     if (!response.ok) {
@@ -39,11 +36,9 @@ export async function createPost(data) {
 }
 
 /* Get a specific post by ID */
-/* Use the correct endpoint */
 export async function readPost(id) {
   const url = API_SOCIAL_POSTS_ID(id);
   
-
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -53,8 +48,6 @@ export async function readPost(id) {
     if (!response.ok) throw new Error("Failed to fetch post");
     
     const data = await response.json();
-    
-
     return data; 
   } catch (error) {
     console.error('Error fetching post:', error);
@@ -62,16 +55,25 @@ export async function readPost(id) {
   }
 }
 
-
 /* Update a post by ID */
 export async function updatePost(id, data) {
-  const response = await fetch(API_SOCIAL_POSTS_ID(id), {
-    method: "PUT",
-    headers: headers(true, true), // Include Content-Type and Authorization
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) throw new Error("Failed to update post");
-  return await response.json();
+  try {
+    const response = await fetch(API_SOCIAL_POSTS_ID(id), {
+      method: "PUT",
+      headers: headers(true, true), // Include Content-Type and Authorization
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to update post");
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating post:", error);
+    throw new Error("Failed to update post: " + error.message);
+  }
 }
 
 /* Delete a post by ID */
@@ -79,27 +81,20 @@ export async function deletePost(id) {
   try {
     const response = await fetch(API_SOCIAL_POSTS_ID(id), {
       method: "DELETE",
-      headers: headers(true), // Include Content-Type and Authorization
+      headers: headers(true),
     });
-
 
     if (!response.ok) {
       throw new Error(`Failed to delete post: ${response.status} ${response.statusText}`);
     }
 
-    /* Handle cases where the server might return an empty response */
-    const text = await response.text(); // Read the response as text first
-    if (!text) {
-      return {}; 
-    }
+    const text = await response.text();
+    if (!text) return {}; 
 
-    /* If the response contains text, parse it as JSON */
-    const result = JSON.parse(text);
-
-    return result;
+    return JSON.parse(text);
   } catch (error) {
     console.error('Error during post deletion:', error);
-    throw error;
+    throw new Error("Failed to delete post: " + error.message);
   }
 }
 
@@ -112,17 +107,18 @@ export async function readPosts(page = 1, perPage = 12, tag = null) {
 
   if (tag) params.append('tag', tag);
 
-  const response = await fetch(`${API_SOCIAL_POSTS}?${params.toString()}`, {
-    method: "GET",
-    headers: headers(true),
-  });
+  try {
+    const response = await fetch(`${API_SOCIAL_POSTS}?${params.toString()}`, {
+      method: "GET",
+      headers: headers(true),
+    });
 
-  /* Log the response to inspect its structure */
-  const result = await response.json();
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message || "Failed to fetch posts");
 
-  if (!response.ok) throw new Error("Failed to fetch posts");
-
-  /* Return result.data if it exists, otherwise return the whole result */
-  return result.data || result;
+    return result.data || result;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw new Error("Failed to fetch posts: " + error.message);
+  }
 }
-
