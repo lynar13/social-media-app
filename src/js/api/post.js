@@ -1,7 +1,7 @@
-import { headers } from "/src/js/api/headers.js";
-import { API_SOCIAL_POSTS } from "/src/js/api/constants.js";
-import { API_SOCIAL_POSTS_ID } from "/src/js/api/constants.js";
-import { currentUser } from "/src/js/utilities/currentUser.js";
+import { headers } from "/social-media-app/src/js/api/headers.js";
+import { API_SOCIAL_POSTS } from "/social-media-app/src/js/api/constants.js";
+import { API_SOCIAL_POSTS_ID } from "/social-media-app/src/js/api/constants.js";
+import { currentUser } from "/social-media-app/src/js/utilities/currentUser.js";
 
 /* Create new post */
 export async function createPost(data) {

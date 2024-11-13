@@ -7,8 +7,8 @@ import {
   API_SOCIAL_PROFILES,
   API_SOCIAL_PROFILES_NAME,
   API_SOCIAL_POSTS_TAG,
-} from '/src/js/api/constants.js'; // Import API URLs from constants.js
-import { headers } from '/src/js/api/headers.js'; // Import headers function from headers.js
+} from '/social-media-app/src/js/api/constants.js'; // Import API URLs from constants.js
+import { headers } from '/social-media-app/src/js/api/headers.js'; // Import headers function from headers.js
 
 export class NoroffAPI {
 

@@ -1,5 +1,5 @@
 // src/js/ui/post/create.js
-import { createPost } from '/src/js/api/post.js';
+import { createPost } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('createPostForm');

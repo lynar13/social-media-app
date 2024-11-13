@@ -1,6 +1,6 @@
 // src/js/api/headers.js
 
-import { API_KEY } from '/src/js/api/constants.js'; 
+import { API_KEY } from '/social-media-app/src/js/api/constants.js'; 
 
 export function headers(includeContentType = false, includeAuth = true) {
   const headers = new Headers();
