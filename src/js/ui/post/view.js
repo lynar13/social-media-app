@@ -1,5 +1,3 @@
-// src/js/ui/post/view.js
-
 import { readPosts } from '/social-media-app/src/js/api/post.js';
 
 let currentPage = 1;
@@ -25,7 +23,7 @@ async function loadPosts(page, limit) {
           <div class="card-body">
             <h5 class="card-title">${post.title || 'Untitled'}</h5>
             <p class="card-text">${post.body ? post.body.slice(0, 100) + '...' : 'No Content Available'}</p>
-            <a href="../post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
+            <a href="/social-media-app/post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
           </div>
         </div>
       `;
@@ -38,21 +36,29 @@ async function loadPosts(page, limit) {
 
 // Set up pagination control listeners
 function setupPaginationControls() {
-  document.querySelectorAll('[data-page]').forEach(btn => {
-    btn.addEventListener('click', (event) => {
-      event.preventDefault();
-      const page = parseInt(btn.getAttribute('data-page'));
-      goToPage(page);
-    });
-  });
+  const paginationButtons = document.querySelectorAll('[data-page]');
+  const limitButtons = document.querySelectorAll('[data-limit]');
 
-  document.querySelectorAll('[data-limit]').forEach(btn => {
-    btn.addEventListener('click', (event) => {
-      event.preventDefault();
-      const limit = parseInt(btn.getAttribute('data-limit'));
-      setPostsPerPage(limit);
+  // Ensure buttons are present in the DOM before adding listeners
+  if (paginationButtons.length > 0) {
+    paginationButtons.forEach(btn => {
+      btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const page = parseInt(btn.getAttribute('data-page'));
+        goToPage(page);
+      });
     });
-  });
+  }
+
+  if (limitButtons.length > 0) {
+    limitButtons.forEach(btn => {
+      btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const limit = parseInt(btn.getAttribute('data-limit'));
+        setPostsPerPage(limit);
+      });
+    });
+  }
 }
 
 // Go to a specific page

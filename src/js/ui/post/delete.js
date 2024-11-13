@@ -1,4 +1,3 @@
-// src/js/ui/post/delete.js
 import { deletePost } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         alert('Post deleted successfully');
         
-        // Redirect to posts list after deletion
-        window.location.href = '/posts/index.html';
+        // Redirect to posts list after deletion with updated path for GitHub Pages
+        window.location.href = '/social-media-app/posts/index.html';
       } catch (error) {
         console.error('Failed to delete post:', error);
         alert('Failed to delete post. Please try again.');

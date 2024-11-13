@@ -1,6 +1,4 @@
-@import url(style.css.map);
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import "/node_modules/bootstrap/scss/bootstrap";
 
 // Custom Theme Colors
 $primary-color: #ff6b6b;
@@ -8,7 +6,7 @@ $secondary-color: #333;
 $background-color: #f7f7f7;
 $navbar-bg-color: #ffffff;
 
-// Override Bootstrap's primary color
+// Override Bootstrap's primary and secondary colors
 $theme-colors: (
   "primary": $primary-color,
   "secondary": $secondary-color
@@ -93,7 +91,6 @@ section .card {
   padding: 0.75rem 1rem;
   text-align: center;
   transition: background-color 0.3s;
-  
 
   &:hover {
     background-color: lighten($primary-color, 60%);
@@ -122,5 +119,3 @@ button {
     background-color: darken($primary-color, 10%);
   }
 }
-
-

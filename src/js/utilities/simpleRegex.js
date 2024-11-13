@@ -1,8 +1,6 @@
-// src/js/utilities/simpleRegex.js
-
 // Find a fragment anywhere in the string
-function findFramentAnywhere(form, stringToSearch) {
-    const regex = new RegExp(term, 'i');
+function findFragmentAnywhere(form, stringToSearch) {
+    const regex = new RegExp(form, 'i');
     return regex.test(stringToSearch);
 }
 
@@ -24,7 +22,7 @@ function findWholeWord(form, stringToSearch) {
     return regex.test(stringToSearch);
 }
 
-// Count occurences of a fragment in the string
+// Count occurrences of a fragment in the string
 function countOccurrences(form, stringToSearch) {
     const regex = new RegExp(form, 'gi');
     const matches = stringToSearch.match(regex);

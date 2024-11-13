@@ -1,4 +1,3 @@
-// src/js/utilities/authGuard.js
 import { currentUser } from './currentUser.js';
 
 export function authGuard() {
@@ -9,7 +8,7 @@ export function authGuard() {
   // If the user or token is not present, redirect to login page
   if (!user || !token) {
     alert("You must be logged in to access this page.");
-    window.location.href = "/auth/login/index.html";  // Redirect to login page
+    window.location.href = "/social-media-app/auth/login/index.html";  // Updated path for GitHub Pages
     return null;
   }
 
@@ -23,14 +22,14 @@ export function authGuard() {
       alert("Your session has expired. Please log in again.");
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-      window.location.href = "/auth/login/index.html"; // Redirect to login page
+      window.location.href = "/social-media-app/auth/login/index.html"; // Updated path for GitHub Pages
       return null;
     }
   } catch (e) {
     console.error("Failed to validate token:", e);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    window.location.href = "/auth/login/index.html";
+    window.location.href = "/social-media-app/auth/login/index.html"; // Updated path for GitHub Pages
     return null;
   }
 

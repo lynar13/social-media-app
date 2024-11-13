@@ -1,6 +1,4 @@
-// src/js/ui/auth/register.js
-
-import { register } from '/social-media-app/src/js/api/auth.js';
+import { register } from '../../api/auth.js'; // Changed to a relative path
 
 export async function onRegister(event) {
   event.preventDefault(); // Prevent default form submission
@@ -33,7 +31,7 @@ export async function onRegister(event) {
     console.log('Stored Token in localStorage:', localStorage.getItem('token'));
 
     // Redirect to the profile page or home page after successful registration and login
-    
+    window.location.href = '../../profile/index.html';
   } catch (error) {
     console.error('Error during registration:', error.message);
     alert(`Registration failed: ${error.message}`);

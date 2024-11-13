@@ -22,14 +22,13 @@ function getPostIdFromUrl() {
 
 // Display the post content
 function displayPost(post) {
-    const postData = post.data; // Access the nested data property
+  const postData = post.data; // Access the nested data property
   
-    document.getElementById('title').textContent = postData.title || 'Untitled';
-    document.getElementById('body').textContent = postData.body || 'No Content Available';
-    document.getElementById('tags').textContent = 'Tags: ' + (postData.tags.length ? postData.tags.join(', ') : 'No Tags');
+  document.getElementById('title').textContent = postData.title || 'Untitled';
+  document.getElementById('body').textContent = postData.body || 'No Content Available';
+  document.getElementById('tags').textContent = 'Tags: ' + (postData.tags.length ? postData.tags.join(', ') : 'No Tags');
   
-    // Update the Edit Post link with the post ID
-    const editLink = document.getElementById('editLink');
-    editLink.href = `../post/edit/index.html?id=${postData.id}`;
-  }
-  
+  // Update the Edit Post link with the post ID for GitHub Pages
+  const editLink = document.getElementById('editLink');
+  editLink.href = `/social-media-app/post/edit/index.html?id=${postData.id}`;
+}

@@ -1,6 +1,5 @@
-
 // Import the Noroff API class
-import { NoroffAPI } from '/social-media-app/src/js/api/index.js';
+import { NoroffAPI } from '../api/index.js'; // Adjusted to relative path
 
 const apiInstance = new NoroffAPI();
 

@@ -1,8 +1,8 @@
 // src/js/api/profile.js
 
-import { headers } from '/social-media-app/src/js/api/headers.js';
-import { API_SOCIAL_PROFILES } from '/social-media-app/src/js/api/constants.js';
-import { currentUser } from '../utilities/currentUser.js';
+import { headers } from '../api/headers.js'; // Adjusted to a relative path
+import { API_SOCIAL_PROFILES } from '../api/constants.js'; // Adjusted to a relative path
+import { currentUser } from '../utilities/currentUser.js'; // Adjusted to a relative path
 
 // Fetch profile data for the current user
 export async function readProfile(username) {

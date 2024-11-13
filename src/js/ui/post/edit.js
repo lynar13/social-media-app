@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
           // Update the post using the modified payload structure
           await updatePost(postId, updatedData);
-          window.location.href = `../../post/index.html?id=${postId}`;
+          window.location.href = `/social-media-app/post/index.html?id=${postId}`;
         } catch (error) {
           console.error('Failed to update post:', error);
           alert('Failed to update post');

@@ -1,17 +1,15 @@
-// src/js/ui/global/logout.js
-
 export function onLogout() {
   try {
     // Remove user-related information from local storage
     localStorage.removeItem("token"); // Remove the stored token
     localStorage.removeItem("user");  // Remove the stored user information
 
-    // Log a message for debugging purposes
-    console.log("User has been logged out");
+    // alert the user
+    alert("User has been logged out");
 
     // Redirect the user to the home page after a short delay
     setTimeout(() => {
-      window.location.href = "/index.html"; // Change this to the correct home page URL
+      window.location.href = "/social-media-app/index.html"; // Adjusted for GitHub Pages
     }, 500); // Adding a slight delay to ensure storage operations complete before redirect
   } catch (error) {
     // Handle any unexpected errors during logout
@@ -25,7 +23,6 @@ function attachLogoutEvent() {
   const logoutButton = document.getElementById("logoutButton");
   if (logoutButton) {
     logoutButton.addEventListener("click", onLogout);
-    
   } else {
     console.error("Logout button not found in the DOM. Retrying...");
 

@@ -14,12 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Convert tags to an array (assuming tags are comma-separated)
       postData.tags = postData.tags ? postData.tags.split(',').map(tag => tag.trim()) : [];
 
-
       try {
         const post = await createPost(postData);
         
-        // Redirect to the newly created post's view page
-        window.location.href = `../post/index.html?id=${post.id}`;
+        // Redirect to the newly created post's view page with updated path for GitHub Pages
+        window.location.href = `/social-media-app/post/index.html?id=${post.id}`;
       } catch (error) {
         console.error('Error creating post:', error);
         alert('Failed to create post: ' + error.message);
