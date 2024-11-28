@@ -28,9 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch and render posts
   async function loadPosts(page, searchTerm = '', sortOption = 'recent') {
     try {
-      const posts = await readPosts(page, postsPerPage, searchTerm, sortOption);
+      // Construct the URL with query parameters for search and sort
+      const url = new URL('/social/posts/search', window.location.origin);
+      const params = new URLSearchParams({
+        q: searchTerm, // search term for filtering posts
+        _page: page,
+        _limit: postsPerPage,
+        _sort: sortOption, // Sorting option (e.g., 'recent' or 'title')
+      });
+
+      url.search = params.toString();
+
+      // Fetch posts from the API
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+      }
+
+      const posts = await response.json();
       postList.innerHTML = ''; // Clear any existing content
 
+      // Render the posts in the DOM
       posts.forEach(post => {
         const postCard = document.createElement('div');
         postCard.className = 'col-md-6 mb-4';
@@ -55,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle search
   searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value;
-    loadPosts(1, searchTerm);
+    loadPosts(1, searchTerm, sortOptions.value); // Trigger post loading with search term
   });
 
   // Handle sort
   sortOptions.addEventListener('change', () => {
     const sortOption = sortOptions.value;
-    loadPosts(1, searchInput.value, sortOption);
+    loadPosts(1, searchInput.value, sortOption); // Trigger post loading with sort option
   });
 
   // Handle create new post
@@ -82,6 +100,28 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Failed to create a new post:', error);
     }
   });
+
+  // Define the renderPagination function
+  function renderPagination() {
+    const totalPosts = 100; // Replace with actual total post count (fetch from API if available)
+    const totalPages = Math.ceil(totalPosts / postsPerPage); // Calculate total number of pages
+    pagination.innerHTML = ''; // Clear previous pagination buttons
+    
+    for (let i = 1; i <= totalPages; i++) {
+      const pageButton = document.createElement('li');
+      pageButton.className = 'page-item';
+      pageButton.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+      
+      // Event listener to change page
+      pageButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        currentPage = i;
+        loadPosts(currentPage, searchInput.value, sortOptions.value); // Load posts with search and sort
+      });
+
+      pagination.appendChild(pageButton);
+    }
+  }
 
   // Initial load
   loadPosts(currentPage);

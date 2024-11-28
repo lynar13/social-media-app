@@ -1,6 +1,7 @@
 import { headers } from "./headers.js";
-import { API_SOCIAL_POSTS, API_SOCIAL_POSTS_ID } from "./constants.js";
-import { currentUser } from "../utilities/currentUser.js"; // Adjust relative path as needed
+import { API_SOCIAL_POSTS, API_SOCIAL_POSTS_ID, API_SOCIAL_POSTS_SEARCH } from "./constants.js";
+import { currentUser } from "../utilities/currentUser.js"; 
+
 
 /* Create new post */
 export async function createPost(data) {
@@ -98,25 +99,26 @@ export async function deletePost(id) {
   }
 }
 
-/* Get a paginated list of posts, optionally filtered by tag */
-export async function readPosts(page = 1, perPage = 12, tag = null) {
+/* Get a paginated list of posts, search and sort posts */
+export async function readPosts(page = 1, perPage = 12, searchTerm = '', sortOption = 'recent') {
   const params = new URLSearchParams({
-    page,
-    perPage,
+    q: searchTerm,  // Search term for filtering posts
+    _page: page,    // Pagination: current page
+    _limit: perPage,  // Pagination: number of posts per page
+    _sort: sortOption  // Sorting option (e.g., recent, title)
   });
 
-  if (tag) params.append('tag', tag);
-
   try {
-    const response = await fetch(`${API_SOCIAL_POSTS}?${params.toString()}`, {
+    const url = `${API_SOCIAL_POSTS_SEARCH}?${params.toString()}`;  // Use the search endpoint
+    const response = await fetch(url, {
       method: "GET",
-      headers: headers(true),
+      headers: headers(true),  // Include authentication if necessary
     });
 
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.message || "Failed to fetch posts");
+    if (!response.ok) throw new Error("Failed to fetch posts");
 
-    return result.data || result;
+    const result = await response.json();
+    return result.data || result;  // Return the fetched posts
   } catch (error) {
     console.error("Error fetching posts:", error);
     throw new Error("Failed to fetch posts: " + error.message);
