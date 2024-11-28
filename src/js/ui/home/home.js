@@ -26,29 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Fetch and render posts
-  async function loadPosts(page, searchTerm = '', sortOption = 'recent') {
+  async function loadPosts(page = 1, searchTerm = '', sortOption = '') {
     try {
-      // Construct the URL with query parameters for search and sort
-      const url = new URL('/social/posts/search', window.location.origin);
-      const params = new URLSearchParams({
-        q: searchTerm, // search term for filtering posts
-        _page: page,
-        _limit: postsPerPage,
-        _sort: sortOption, // Sorting option (e.g., 'recent' or 'title')
-      });
+      const posts = await readPosts(page, 12, searchTerm, sortOption);
+      postList.innerHTML = ''; // Clear existing content
 
-      url.search = params.toString();
-
-      // Fetch posts from the API
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Failed to fetch posts');
-      }
-
-      const posts = await response.json();
-      postList.innerHTML = ''; // Clear any existing content
-
-      // Render the posts in the DOM
       posts.forEach(post => {
         const postCard = document.createElement('div');
         postCard.className = 'col-md-6 mb-4';
@@ -63,8 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         postList.appendChild(postCard);
       });
-
-      renderPagination();
     } catch (error) {
       console.error('Failed to load posts:', error);
     }

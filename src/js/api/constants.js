@@ -27,4 +27,4 @@ export const API_SOCIAL_POSTS_TAG = (tag) => `${API_SOCIAL_POSTS}?tag=${tag}`;
 
 export const API_SOCIAL_PROFILES_POSTS = (name) => `${API_SOCIAL}/profiles/${name}/posts`;
 
-export const API_SOCIAL_POSTS_SEARCH = `${API_SOCIAL_POSTS}/search?q=<query>`;
+export const API_SOCIAL_POSTS_SEARCH = `${API_SOCIAL_POSTS}/search`;
