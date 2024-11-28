@@ -6,10 +6,8 @@
     <title>Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <link rel="stylesheet" href="/social-media-app/src/css/style.css">
     <script type="module" src="/social-media-app/src/js/app.js"></script>
-    <script type="module" src="/social-media-app/src/js/ui/global/logout.js"></script>
     <script type="module" src="/social-media-app/src/js/ui/profile/profile.js"></script>
   </head>
   <body>
@@ -22,26 +20,32 @@
 
       <!-- Profile Section -->
       <section class="card p-4 shadow-sm">
-        <h1 class="text-center mb-4">Profile</h1>
+        <div class="text-center mb-4">
+          <img src="/social-media-app/public/images/profile.jpeg" alt="Profile Image" id="profileImage" class="rounded-circle" width="150" />
+        </div>
+        <h1 class="text-center mb-4" id="username"></h1>
 
-        <div class="mb-3">
-          <h2>Welcome <span id="username"></span></h2>
+        <div class="text-center">
+          <button id="followButton" class="btn btn-primary">Follow</button>
         </div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label"><strong>Email:</strong></label>
-          <span id="email"></span>
+        <div class="d-flex justify-content-around mt-4">
+          <div>
+            <h5>Followers</h5>
+            <p id="followersCount">0</p>
+          </div>
+          <div>
+            <h5>Following</h5>
+            <p id="followingCount">0</p>
+          </div>
         </div>
+      </section>
 
-        <div class="mb-3">
-          <label for="bio" class="form-label"><strong>Bio:</strong></label>
-          <textarea id="bio" class="form-control" placeholder="Your bio goes here..."></textarea>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="d-flex justify-content-between">
-          <a href="/social-media-app/post/create/index.html" class="btn btn-secondary">Create Post</a>
-          <a href="/social-media-app/posts/index.html" class="btn btn-secondary">View Posts</a>
+      <!-- User Posts Section -->
+      <section class="mt-5">
+        <h2 class="mb-4">My Posts</h2>
+        <div id="userPosts" class="row">
+          <!-- User posts will be dynamically populated here -->
         </div>
       </section>
     </div>

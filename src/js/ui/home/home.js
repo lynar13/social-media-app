@@ -1,4 +1,4 @@
-import { readPosts } from '/social-media-app/src/js/api/post.js';
+import { readPosts, createPost } from '/social-media-app/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
@@ -6,43 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const postList = document.getElementById('postList');
   const pagination = document.getElementById('pagination');
-  
-  const loginButton = document.getElementById('loginButton');
-  const registerButton = document.getElementById('registerButton');
-  const logoutButton = document.getElementById('logoutButton');
+  const searchInput = document.getElementById('searchInput');
+  const sortOptions = document.getElementById('sortOptions');
+  const createPostForm = document.getElementById('createPostForm');
+  const postTitle = document.getElementById('postTitle');
+  const postContent = document.getElementById('postContent');
 
-  // Function to toggle visibility of login, register, and logout buttons
-  function updateAuthButtons() {
-    const isLoggedIn = localStorage.getItem('token'); // Check if token exists
-
-    if (isLoggedIn) {
-      // User is logged in, show logout button, hide login and register buttons
-      loginButton.style.display = 'none';
-      registerButton.style.display = 'none';
-      logoutButton.style.display = 'inline-block';
-    } else {
-      // User is not logged in, show login and register buttons, hide logout button
-      loginButton.style.display = 'inline';
-      registerButton.style.display = 'inline';
-      logoutButton.style.display = 'none';
-    }
-  }
-
-  // Call the function on page load
-  updateAuthButtons();
-
-  // Add event listener to logout button to log out the user
-  if (logoutButton) {
-    logoutButton.addEventListener('click', () => {
-      localStorage.removeItem('token'); // Remove token from localStorage
-      updateAuthButtons(); // Update button visibility
-    });
-  }
-
-  // Fetch and render posts based on the current page
-  async function loadPosts(page) {
+  // Fetch and render posts
+  async function loadPosts(page, searchTerm = '', sortOption = 'recent') {
     try {
-      const posts = await readPosts(page, postsPerPage);
+      const posts = await readPosts(page, postsPerPage, searchTerm, sortOption);
       postList.innerHTML = ''; // Clear any existing content
 
       posts.forEach(post => {
@@ -53,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="card-body">
               <h5 class="card-title">${post.title || 'Untitled'}</h5>
               <p class="card-text">${post.body ? post.body.slice(0, 100) + '...' : 'No Content Available'}</p>
-              <a href="/social-media-app/post/index.html?id=${post.id}" class="btn btn-primary">Read More</a> <!-- Updated path for GitHub Pages -->
+              <a href="/social-media-app/post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
             </div>
           </div>
         `;
@@ -62,48 +35,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
       renderPagination();
     } catch (error) {
-      console.error('Failed to load recent posts:', error);
+      console.error('Failed to load posts:', error);
     }
   }
 
-  // Render pagination buttons
-  function renderPagination() {
-    pagination.innerHTML = ''; // Clear existing pagination buttons
+  // Handle search
+  searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value;
+    loadPosts(1, searchTerm);
+  });
 
-    // Add "Previous" button
-    const prevButton = document.createElement('li');
-    prevButton.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-    prevButton.innerHTML = `<a class="page-link" href="#">Previous</a>`;
-    prevButton.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        loadPosts(currentPage);
-      }
-    });
-    pagination.appendChild(prevButton);
+  // Handle sort
+  sortOptions.addEventListener('change', () => {
+    const sortOption = sortOptions.value;
+    loadPosts(1, searchInput.value, sortOption);
+  });
 
-    // Add individual page numbers
-    for (let i = 1; i <= 5; i++) { // Adjust the range if needed
-      const pageItem = document.createElement('li');
-      pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
-      pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-      pageItem.addEventListener('click', () => {
-        currentPage = i;
-        loadPosts(currentPage);
-      });
-      pagination.appendChild(pageItem);
+  // Handle create new post
+  createPostForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const newPost = {
+      title: postTitle.value,
+      body: postContent.value,
+    };
+
+    try {
+      await createPost(newPost);
+      postTitle.value = '';
+      postContent.value = '';
+      loadPosts(1); // Reload posts after creating a new one
+    } catch (error) {
+      console.error('Failed to create a new post:', error);
     }
-
-    // Add "Next" button
-    const nextButton = document.createElement('li');
-    nextButton.className = 'page-item';
-    nextButton.innerHTML = `<a class="page-link" href="#">Next</a>`;
-    nextButton.addEventListener('click', () => {
-      currentPage++;
-      loadPosts(currentPage);
-    });
-    pagination.appendChild(nextButton);
-  }
+  });
 
   // Initial load
   loadPosts(currentPage);

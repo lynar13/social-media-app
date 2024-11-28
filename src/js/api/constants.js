@@ -25,3 +25,4 @@ export const API_SOCIAL_PROFILES_NAME = `${API_SOCIAL}/profiles/<name>`;
 
 export const API_SOCIAL_POSTS_TAG = (tag) => `${API_SOCIAL_POSTS}?tag=${tag}`;
 
+export const API_SOCIAL_PROFILES_POSTS = (name) => `${API_SOCIAL}/profiles/${name}/posts`;

@@ -1,7 +1,5 @@
-// src/js/api/profile.js
-
 import { headers } from '../api/headers.js'; // Adjusted to a relative path
-import { API_SOCIAL_PROFILES } from '../api/constants.js'; // Adjusted to a relative path
+import { API_SOCIAL_PROFILES, API_SOCIAL_PROFILES_POSTS } from '../api/constants.js'; // Adjusted to a relative path
 import { currentUser } from '../utilities/currentUser.js'; // Adjusted to a relative path
 
 // Fetch profile data for the current user
@@ -43,6 +41,26 @@ export async function updateProfile(username, data) {
     return updatedProfile; // Return the updated profile data
   } catch (error) {
     console.error('Error updating profile:', error);
+    throw error;
+  }
+}
+
+// Fetch posts made by a specific user
+export async function readUserPosts(username) {
+  try {
+    const response = await fetch(API_SOCIAL_PROFILES_POSTS(username), {
+      method: 'GET',
+      headers: headers(), // Use headers to include the API key and authorization token
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to load user posts');
+    }
+
+    return await response.json(); // Return the posts as an array
+  } catch (error) {
+    console.error('Error reading user posts:', error);
     throw error;
   }
 }
