@@ -47,20 +47,10 @@ export async function updateProfile(username, data) {
 
 // Fetch posts made by a specific user
 export async function readUserPosts(username) {
-  try {
-    const response = await fetch(API_SOCIAL_PROFILES_POSTS(username), {
-      method: 'GET',
-      headers: headers(), // Use headers to include the API key and authorization token
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to load user posts');
-    }
-
-    return await response.json(); // Return the posts as an array
-  } catch (error) {
-    console.error('Error reading user posts:', error);
-    throw error;
-  }
+  const response = await fetch(`${API_SOCIAL_PROFILES}/${username}/posts`, {
+    headers: headers(true),
+  });
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.message || 'Failed to fetch user posts');
+  return result.data || []; // Ensure an array is returned
 }
