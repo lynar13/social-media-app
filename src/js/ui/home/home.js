@@ -11,6 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const createPostForm = document.getElementById('createPostForm');
   const postTitle = document.getElementById('postTitle');
   const postContent = document.getElementById('postContent');
+  const loginButton = document.getElementById('loginButton');
+  const registerButton = document.getElementById('registerButton');
+  const logoutButton = document.getElementById('logoutButton');
+
+  // Hide login/register buttons if user is logged in
+  const user = localStorage.getItem('user');
+  if (user) {
+    loginButton.style.display = 'none';
+    registerButton.style.display = 'none';
+    logoutButton.style.display = 'block'; // Show logout button
+  } else {
+    logoutButton.style.display = 'none'; // Hide logout button if user is not logged in
+  }
 
   // Fetch and render posts
   async function loadPosts(page, searchTerm = '', sortOption = 'recent') {
