@@ -1,4 +1,4 @@
-import { readPost } from '/social-media-app/src/js/api/post.js';
+import { readPost } from '/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const postId = getPostIdFromUrl();
@@ -30,5 +30,5 @@ function displayPost(post) {
   
   // Update the Edit Post link with the post ID for GitHub Pages
   const editLink = document.getElementById('editLink');
-  editLink.href = `/social-media-app/post/edit/index.html?id=${postData.id}`;
+  editLink.href = `/post/edit/index.html?id=${postData.id}`;
 }

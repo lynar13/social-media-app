@@ -31,7 +31,7 @@ export async function onRegister(event) {
     console.log('Stored Token in localStorage:', localStorage.getItem('token'));
 
     // Redirect to the profile page or home page after successful registration and login
-    window.location.href = '../../profile/index.html';
+    window.location.href = '/profile/index.html';
   } catch (error) {
     console.error('Error during registration:', error.message);
     alert(`Registration failed: ${error.message}`);

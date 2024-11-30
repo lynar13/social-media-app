@@ -1,5 +1,5 @@
 // src/js/ui/post/create.js
-import { createPost } from '/social-media-app/src/js/api/post.js';
+import { createPost } from '/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('createPostForm');
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const post = await createPost(postData);
         
         // Redirect to the newly created post's view page with updated path for GitHub Pages
-        window.location.href = `/social-media-app/post/index.html?id=${post.id}`;
+        window.location.href = `/post/index.html?id=${post.id}`;
       } catch (error) {
         console.error('Error creating post:', error);
         alert('Failed to create post: ' + error.message);

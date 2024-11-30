@@ -1,4 +1,4 @@
-import { readPosts, createPost } from '/social-media-app/src/js/api/post.js';
+import { readPosts, createPost } from '/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="card-body">
               <h5 class="card-title">${post.title || 'Untitled'}</h5>
               <p class="card-text">${post.body ? post.body.slice(0, 100) + '...' : 'No Content Available'}</p>
-              <a href="/social-media-app/post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
+              <a href="/post/index.html?id=${post.id}" class="btn btn-primary">Read More</a>
             </div>
           </div>
         `;

@@ -1,4 +1,4 @@
-import { readProfile, readUserPosts } from '/social-media-app/src/js/api/profile.js';
+import { readProfile, readUserPosts } from '/src/js/api/profile.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const userString = localStorage.getItem('user');
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Check for user data in localStorage
   if (!userString) {
     alert('User not found. Please login again.');
-    window.location.href = '/social-media-app/auth/login/index.html';
+    window.location.href = '/auth/login/index.html';
     return;
   }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     alert('Invalid user data. Redirecting to login.');
-    window.location.href = '/social-media-app/auth/login/index.html';
+    window.location.href = '/auth/login/index.html';
     return;
   }
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const profile = await readProfile(user.name);
     document.getElementById('username').textContent = profile.name;
-    document.getElementById('profileImage').src = profile.profileImage || '/social-media-app/public/images/profile.jpeg';
+    document.getElementById('profileImage').src = profile.profileImage || '/public/images/profile.jpeg';
     document.getElementById('followersCount').textContent = profile.followers || 0;
     document.getElementById('followingCount').textContent = profile.following || 0;
 

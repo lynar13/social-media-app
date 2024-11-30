@@ -1,4 +1,4 @@
-import { readPost, updatePost } from '/social-media-app/src/js/api/post.js';
+import { readPost, updatePost } from '/src/js/api/post.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
           // Update the post using the modified payload structure
           await updatePost(postId, updatedData);
-          window.location.href = `/social-media-app/post/index.html?id=${postId}`;
+          window.location.href = `/post/index.html?id=${postId}`;
         } catch (error) {
           console.error('Failed to update post:', error);
           alert('Failed to update post');
