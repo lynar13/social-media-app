@@ -1,7 +1,7 @@
 // src/js/api/auth.js
 
-import { API_AUTH_LOGIN, API_AUTH_REGISTER } from '/src/js/api/constants.js';
-import { headers } from '/src/js/api/headers.js';
+import { API_AUTH_LOGIN, API_AUTH_REGISTER } from './constants.js';
+import { headers } from './headers.js';
 
 // Function for user login
 export async function login(data) {

@@ -7,8 +7,9 @@ import {
   API_SOCIAL_PROFILES,
   API_SOCIAL_PROFILES_NAME,
   API_SOCIAL_POSTS_TAG,
-} from '/src/js/api/constants.js'; // Import API URLs from constants.js
-import { headers } from '/src/js/api/headers.js'; // Import headers function from headers.js
+
+} from './constants.js'; // Import API URLs from constants.js
+import { headers } from './headers.js'; // Import headers function from headers.js
 
 export class NoroffAPI {
 
@@ -181,16 +182,13 @@ export class NoroffAPI {
   posts = {
     read: async (page = 1, limit = 12, tag) => {
       const url = new URL(API_SOCIAL_POSTS);
-      
-      if (tag) {
-        url.searchParams.append("tag", tag);
-      }
+      const params = new URLSearchParams({ page, limit });
 
-      url.searchParams.append("page", page);
-      url.searchParams.append("limit", limit);
+      if (tag) params.append("tag", tag);
+      url.search = params.toString();
 
       const response = await fetch(url, {
-        headers: headers(), // Use headers with API key
+        headers: headers(),
       });
 
       if (response.ok) {
@@ -202,12 +200,10 @@ export class NoroffAPI {
     },
     
     create: async ({ title, body, tags, media }) => {
-      const url = new URL(API_SOCIAL_POSTS);
-
-      const response = await fetch(url, {
+      const response = await fetch(API_SOCIAL_POSTS, {
         method: "POST",
-        headers: headers(), // Use headers with API key
-        body: JSON.stringify({ title, body, tags, media })
+        headers: headers(true),
+        body: JSON.stringify({ title, body, tags, media }),
       });
 
       if (response.ok) {
@@ -218,7 +214,7 @@ export class NoroffAPI {
       throw new Error("Couldn't create post");
     }
   };
-
+       
   // User profiles handling
   profiles = {
     read: async (username) => {
