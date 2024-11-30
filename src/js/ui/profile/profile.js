@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const profile = await readProfile(user.name);
     document.getElementById('username').textContent = profile.name;
-    document.getElementById('profileImage').src = profile.profileImage || '/public/images/profile.jpeg';
+    document.getElementById('profileImage').src = profile.profileImage || '/images/profile.jpeg';
     document.getElementById('followersCount').textContent = profile.followers || 0;
     document.getElementById('followingCount').textContent = profile.following || 0;
 
