@@ -1,3 +1,4 @@
+
 import { headers } from '../api/headers.js'; // Adjusted to a relative path
 import { API_SOCIAL_PROFILES, API_SOCIAL_PROFILES_POSTS } from '../api/constants.js'; // Adjusted to a relative path
 import { currentUser } from '../utilities/currentUser.js'; // Adjusted to a relative path
@@ -54,3 +55,4 @@ export async function readUserPosts(username) {
   if (!response.ok) throw new Error(result.message || 'Failed to fetch user posts');
   return result.data || []; // Ensure an array is returned
 }
+

@@ -1,3 +1,4 @@
+
 import router from "/src/js/router/index.js"; 
 
 import "../css/style.scss";
@@ -7,3 +8,4 @@ async function initRouter() {
 }
 
 initRouter();
+

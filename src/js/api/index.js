@@ -7,6 +7,7 @@ import {
   API_SOCIAL_PROFILES,
   API_SOCIAL_PROFILES_NAME,
   API_SOCIAL_POSTS_TAG,
+
 } from './constants.js'; // Import API URLs from constants.js
 import { headers } from './headers.js'; // Import headers function from headers.js
 
@@ -213,7 +214,7 @@ export class NoroffAPI {
       throw new Error("Couldn't create post");
     }
   };
-
+       
   // User profiles handling
   profiles = {
     read: async (username) => {

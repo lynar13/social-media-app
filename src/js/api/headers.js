@@ -2,7 +2,6 @@
 
 import { API_KEY } from './constants.js';
 
-
 export function headers(includeContentType = false, includeAuth = true) {
   const headers = new Headers();
 

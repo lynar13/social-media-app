@@ -3,7 +3,6 @@
 import { API_AUTH_LOGIN, API_AUTH_REGISTER } from './constants.js';
 import { headers } from './headers.js';
 
-
 // Function for user login
 export async function login(data) {
   try {

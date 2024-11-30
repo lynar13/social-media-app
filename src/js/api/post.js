@@ -1,3 +1,4 @@
+
 import { headers } from "./headers.js";
 import { API_SOCIAL_POSTS, API_SOCIAL_POSTS_ID, API_SOCIAL_POSTS_SEARCH } from "./constants.js";
 import { currentUser } from "../utilities/currentUser.js"; 
@@ -21,8 +22,6 @@ export async function createPost(data) {
       body: JSON.stringify(data),
     });
     
-    console.log('Create Post Response:', response);
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Post creation failed');
@@ -37,6 +36,7 @@ export async function createPost(data) {
 }
 
 /* Get a specific post by ID */
+
 export async function readPost(id) {
   const url = API_SOCIAL_POSTS_ID(id);
   
@@ -54,6 +54,9 @@ export async function readPost(id) {
     console.error('Error fetching post:', error);
     throw error;
   }
+}
+
+
 }
 
 /* Update a post by ID */
